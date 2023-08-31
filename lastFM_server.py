@@ -225,7 +225,7 @@ def cb_experiment(n_epochs, n_iters, listening_df, user_df, tag_df):
     tagged_listening_df = pd.merge(listening_df, tag_df, on='track_id')
 
     for _ in range(n_epochs):
-        small_listening_df = tagged_listening_df.sample(frac=0.02, ignore_index=True)
+        small_listening_df = tagged_listening_df.sample(frac=0.02)
 
         user_n = small_listening_df['user_id'].nunique()
         item_n = small_listening_df['track_id'].nunique()
@@ -314,7 +314,7 @@ if __name__ == '__main__':
 
     tag_df = pd.DataFrame(track_tags_lst, columns=['track_id', 'tags'])
 
-    (all_f_cb_r, all_m_cb_r) = cb_experiment(10, 5, listening_df, user_df, tag_df)
+    (all_f_cb_r, all_m_cb_r) = cb_experiment(1, 1, listening_df, user_df, tag_df)
 
     cb_fairness_scores = np.abs(all_f_cb_r - all_m_cb_r)
     print(f'Average fairness score for cb: {np.average(cb_fairness_scores)}; std: {np.std(cb_fairness_scores)}.')
