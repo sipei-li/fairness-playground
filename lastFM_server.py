@@ -88,7 +88,7 @@ def cf_experiment(n_epochs, listening_df, user_df):
 
     for _ in range(n_epochs):
         # small_listening_df = listening_df.sample(frac=0.005, ignore_index=True) #1/200 of dataset
-        small_listening_df = listening_df.sample(frac=0.0005)  #ignore_index removed for pandas version < 1.3.0
+        small_listening_df = listening_df.sample(frac=0.005)  #ignore_index removed for pandas version < 1.3.0
         # small_listening_df = listening_df #1/1 of dataset
 
         user_n = small_listening_df['user_id'].nunique()
@@ -165,6 +165,7 @@ def cf_experiment(n_epochs, listening_df, user_df):
     return (all_f_cf_r, all_m_cf_r)
 
 if __name__ == '__main__':
+    """
     # for local
     listening_df = pd.read_csv('data/lastfm/listening_events.tsv', header=1, sep='\t',
                       names=['user_id', 'track_id', 'album_id', 'timestamp'])
@@ -177,13 +178,13 @@ if __name__ == '__main__':
                       names=['user_id', 'track_id', 'album_id', 'timestamp'])
     user_df = pd.read_csv('/data/sli21/lastfm/users.tsv', header=1, sep='\t',
                       names=['user_id', 'country', 'age', 'gender', 'creation_time'])
-    """
+    
     listening_df = listening_df[listening_df['user_id'] != 2]
 
     f_users = user_df[user_df['gender'] == 'f']
     m_users = user_df[user_df['gender'] == 'm']
 
-    cf_results = cf_experiment(1, listening_df, user_df)
+    cf_results = cf_experiment(10, listening_df, user_df)
 
     all_f_cf_r = np.array(cf_results[0])
     all_m_cf_r = np.array(cf_results[1])
