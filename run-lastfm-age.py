@@ -120,9 +120,9 @@ if __name__ == '__main__':
     n = sys.argv[1]
     
     # for server
-    listening_df = pd.read_csv('/data/sli21/lastfm/listening_events.tsv', header=1, sep='\t',
+    listening_df = pd.read_csv('/data/sli21/lastfm_2020/listening_events_2020.tsv', header=1, sep='\t',
                                names=['user_id', 'track_id', 'album_id', 'timestamp'])
-    user_df = pd.read_csv('/data/sli21/lastfm/users.tsv', header=1, sep='\t',
+    user_df = pd.read_csv('/data/sli21/lastfm_2020/users_2020.tsv', header=1, sep='\t',
                           names=['user_id', 'country', 'age', 'gender', 'creation_time'])
     
     # user with id 2 is not in the `user_df`, so we delete their record from `listening_df` as well.
