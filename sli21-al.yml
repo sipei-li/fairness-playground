@@ -1,5 +1,6 @@
 name: active-learning
 channels:
+  - conda-forge
   - defaults
 dependencies:
   - ca-certificates=2022.07.19=haa95532_0
@@ -93,4 +94,4 @@ dependencies:
     - wcwidth==0.2.5
     - webencodings==0.5.1
     - zipp==3.8.1
-prefix: C:\Programs\Anaconda3\envs\active-learning
+# prefix: C:\Programs\Anaconda3\envs\active-learning
