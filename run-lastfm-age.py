@@ -117,7 +117,7 @@ def sample_evaluate(test_user_ids, knn, X, train_df, test_df, item_n):
     return np.average(r)
 
 if __name__ == '__main__':
-    n = sys.argv[1]
+    n = int(sys.argv[1])
     
     # for server
     listening_df = pd.read_csv('/data/sli21/lastfm_2020/listening_events_2020.tsv', header=1, sep='\t',
