@@ -285,9 +285,9 @@ if __name__ == '__main__':
         n_iters = 1
         for _ in range(n_iters):
 
-            test_group_one_user_ids = np.random.choice(group_one_user_ids, size=100, replace=False)
-            test_group_two_user_ids = np.random.choice(group_two_user_ids, size=100, replace=False)
-            test_group_thr_user_ids = np.random.choice(group_thr_user_ids, size=100, replace=False)
+            test_group_one_user_ids = np.random.choice(group_one_user_ids, size=10, replace=False)
+            test_group_two_user_ids = np.random.choice(group_two_user_ids, size=10, replace=False)
+            test_group_thr_user_ids = np.random.choice(group_thr_user_ids, size=10, replace=False)
 
             group_one_recall = sample_evaluate(test_group_one_user_ids, knn, X_tfidf, train_df, test_df, item_n)
             group_two_recall = sample_evaluate(test_group_two_user_ids, knn, X_tfidf, train_df, test_df, item_n)
@@ -302,4 +302,5 @@ if __name__ == '__main__':
                      np.mean(all_group_thr_recall)]
         all_cb_ugf.append(ugf(cb_scores))
 
-        print(f'cf avg ugf: {np.mean(all_cf_ugf)}, std: {np.std(all_cf_ugf)}; cb avg ugf: {np.mean(all_cb_ugf)}, std: {np.std(all_cb_ugf)}.')
+    with open('age_results.txt', 'w') as f:
+        f.write(f'cf avg ugf: {np.mean(all_cf_ugf)}, std: {np.std(all_cf_ugf)}; cb avg ugf: {np.mean(all_cb_ugf)}, std: {np.std(all_cb_ugf)}.')
