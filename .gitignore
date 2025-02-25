@@ -1,5 +1,5 @@
-ml-1m/
-ml-100k/
 data/
 results/
 __pycache__/
+.ipynb_checkpoints
+plots/

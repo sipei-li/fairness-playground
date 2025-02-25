@@ -1,4 +1,5 @@
 import sys
+import os
 import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -117,12 +118,18 @@ def sample_evaluate(test_user_ids, knn, X, train_df, test_df, item_n):
     return np.average(r)
 
 if __name__ == '__main__':
-    n = int(sys.argv[1])
+    if sys.argv[1] == 'local':
+        DATADIR = './data/'
+    elif sys.argv[1] == 'server':
+        DATADIR = '/data/sli21/'
+    else:
+        print("First argument should be local or server!")
+    n = int(sys.argv[2])
     
     # for server
-    listening_df = pd.read_csv('/data/sli21/lastfm_2020/listening_events_2020.tsv', header=1, sep='\t',
+    listening_df = pd.read_csv(os.path.join(DATADIR, 'lastfm_2020/listening_events_2020.tsv'), header=1, sep='\t',
                                names=['user_id', 'track_id', 'album_id', 'timestamp'])
-    user_df = pd.read_csv('/data/sli21/lastfm_2020/users_2020.tsv', header=1, sep='\t',
+    user_df = pd.read_csv(os.path.join(DATADIR, 'lastfm_2020/users_2020.tsv'), header=1, sep='\t',
                           names=['user_id', 'country', 'age', 'gender', 'creation_time'])
     
     # user with id 2 is not in the `user_df`, so we delete their record from `listening_df` as well.
@@ -220,7 +227,7 @@ if __name__ == '__main__':
 
     # cb
     track_json_lst = []
-    with open('/data/sli21/lastfm/tags.json', 'r', encoding='utf-8') as f:
+    with open(os.path.join(DATADIR, 'lastfm/tags.json'), 'r', encoding='utf-8') as f:
         for obj in f:
             track_dict = json.loads(obj)
             track_json_lst.append(track_dict)
